@@ -1,0 +1,27 @@
+{
+  "name": "RemotePlayer",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./main.js"
+  },
+  "dependencies": {
+    "fs": "~0.0.2",
+    "async": "~1.5.2",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jsonwebtoken": "^5.4.1",
+    "mongoose": "^4.2.8",
+    "socket.io": "^1.4.6",
+    "xml2js": "^0.4.16",
+    "crypto": "^0.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "mongoose": "^4.2.6",
+    "socket.io-logger": "~0.0.2"
+  }
+}
