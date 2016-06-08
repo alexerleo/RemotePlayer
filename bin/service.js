@@ -147,14 +147,17 @@ service.prototype.device = function(data, user_id, callback){
     this.parseRequest(data, function(parsed){
         var id = parsed.devices[0].Device[0].info[0]['a:id'][0];
         User.findOne({user_id: user_id}, function(err,user){
-            console.log('=> service.device deviceString:', deviceString);
-            console.log('=> service.device id:', id);
-            console.log('=> service.device user', user);
            try {
                var device = user.devices.filter(function(e){
                    return e.id == id;
-               })[0] || {id: id};
-               device.data = deviceString;
+               })[0];
+               if(!device)
+                   user.devices.push({
+                       id: id,
+                       data: deviceString
+                   });
+               else
+                    device.data = deviceString;
                user.save();
                var devices = user.devices.filter(function(e){
                    return e.id != device.id;
