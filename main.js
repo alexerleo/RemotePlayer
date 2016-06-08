@@ -9,11 +9,10 @@ var debug = require('debug')('RemotePlayer:server'),
     secret_key = 'secret_key';
 
 // mongo connection
-var mongoUrl = //"mongodb://localhost/remote";
-    !config.mongodb.user && !config.mongodb.password
-        ? "mongodb://localhost/" + config.mongodb.database
-        : "mongodb://" + config.mongodb.user + ":" + config.mongodb.password + "@" + config.mongodb.host + ":" + config.mongodb.port + "/" + config.mongodb.database;
-
+var mongoUrl =
+    config.mongodb.user && config.mongodb.password
+        ? "mongodb://" + config.mongodb.user + ":" + config.mongodb.password + "@" + config.mongodb.host + ":" + config.mongodb.port + "/" + config.mongodb.database
+        : "mongodb://localhost/" + config.mongodb.database;
 mongoose.connect(mongoUrl);
 
 /**
