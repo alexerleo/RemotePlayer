@@ -158,18 +158,19 @@ service.prototype.device = function(data, user_id, callback){
                    });
                else
                     device.data = deviceString;
-               user.save();
-               var devices = user.devices.filter(function(e){
-                   return e.id != device.id;
-               }).map(function(e){
-                   return e.data;
-               });
-               var msg = self.buildMessage(null, {
-                   devices: devices
-               });
-               callback({
-                   msg: msg,
-                   device_id: id
+               user.save(function(err){
+                   var devices = user.devices.filter(function(e){
+                       return e.id != device.id;
+                   }).map(function(e){
+                       return e.data;
+                   });
+                   var msg = self.buildMessage(null, {
+                       devices: devices
+                   });
+                   callback({
+                       msg: msg,
+                       device_id: id
+                   });
                });
            }
            catch(err)
