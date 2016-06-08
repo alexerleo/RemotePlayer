@@ -66,6 +66,7 @@ hub.init = function(server){
         socket.on('Device', function(data){
             service.parseToken(socket, function (decoded) {
                 service.device(data, decoded.user_id, function(data){
+                    console.log('=> onDevice', data);
                     if(!data.error) {
                         connection.findOne({
                             user_id: decoded.user_id,
