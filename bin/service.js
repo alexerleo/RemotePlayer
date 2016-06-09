@@ -151,13 +151,13 @@ service.prototype.device = function(data, user_id, callback){
                var device = user.devices.filter(function(e){
                    return e.id == id;
                })[0];
-               if(!device)
-                   user.devices.push({
-                       id: id,
-                       data: deviceString
-                   });
-               else
-                    device.data = deviceString;
+               if(!device) {
+                   device = {
+                       id: id
+                   };
+                   user.devices.push(device);
+               }
+               device.data = deviceString;
                user.save(function(err){
                    var devices = user.devices.filter(function(e){
                        return e.id != device.id;
