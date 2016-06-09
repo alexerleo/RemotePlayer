@@ -68,6 +68,7 @@ hub.init = function(server){
                 service.device(data, decoded.user_id, function(data){
                     console.log('=> onDevice', data);
                     if(!data.error) {
+                        console.log('=> onDevice before find con');
                         connection.findOne({
                             user_id: decoded.user_id,
                             connection_id: socket.id
