@@ -74,7 +74,7 @@ hub.init = function(server){
                             connection_id: socket.id
                         }, function(err, con){
                             console.log("=> onDevice connection:", err, con);
-                            con.device_id = data.id;
+                            con.device_id = data.device_id;
                             con.save();
                             socket.emit('Devices', data.msg);
                         });
