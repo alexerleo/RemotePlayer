@@ -72,6 +72,7 @@ hub.init = function(server){
                             user_id: decoded.user_id,
                             connection_id: socket.id
                         }, function(err, con){
+                            console.log("=> onDevice connection:", err, con);
                             con.device_id = data.id;
                             con.save();
                             socket.emit('Devices', data.msg);
