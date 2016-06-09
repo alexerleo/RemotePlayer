@@ -37,13 +37,19 @@ service.prototype.auth = function(data, callback){
             });
         };
         User.findOne({email: email}, function(err, user){
-            if(!user){
+            if(!(user || err)){
                 var newUser = new User();
                 newUser.email = email;
                 newUser.password = password;
                 newUser.devices = [];
-                newUser.save();
-                _callback(newUser);
+                newUser.save(function(err){
+                    if(err)
+                        User.findOne({email: email}, function(err, user){
+                            _callback(user);
+                        });
+                    else
+                        _callback(newUser);
+                });
             }
             else if(user.password != password){
                 var msg = self.buildMessage(null, {
